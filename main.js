@@ -11,9 +11,48 @@ const jobTypes = {
 
 // Your code will go here
 
+class CrewMember {
+  constructor(name, job, specialSkill){
+    this.name = name;
+    this.job = job;
+    this.specialSkill = specialSkill;
+    this.ship = null;
+  }
+  enterShip(shipObject) {
+    this.ship = shipObject;
+    shipObject.crew.push(this);
+  }
+  // deposit(amt) {
+  //   if (amt > 0) {
+  //     let depositTransaction = new Transaction(amt, 'Deposit');
+  //     this.transactions.push(depositTransaction);
+  //   }
+  // }
+  // charge(amt, payee) {
+  //   let currentBalance = this.balance();
+  //   if (amt > 0 && amt <= currentBalance) {
+  //     let chargeTransaction = new Transaction(-amt, payee);
+  //     this.transactions.push(chargeTransaction);
+  //   }
+  // }
+}
 
-
-
+class Ship {
+  constructor(name, type, ability) {
+    this.name = name;
+    this.type = type;
+    this.ability = ability;
+    this.crew = [];
+  }
+  missionStatement() {
+    if (this.crew.length > 0) {
+      return this.ability;
+    }
+    else {
+      return "Can't perform a mission yet.";
+    }
+  }
+}
 
 
 
@@ -38,6 +77,7 @@ if (typeof describe === 'function'){
       const crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
       crewMember1.enterShip(mav);
       assert.equal(crewMember1.ship, mav);
+      console.log(mav.crew)
       assert.equal(mav.crew.length, 1);
       assert.equal(mav.crew[0], crewMember1);
     });
